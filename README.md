@@ -1,2 +1,2 @@
 # Fake-Currency-detector-project-1-
-using python i will be building a fake currency detector 
+My first project ,a fake currency detector using python 
