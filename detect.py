@@ -15,3 +15,10 @@ kp1, des1 = orb.detectAndCompute(real_note, None)
 
 #des (Descriptors): This is the mathematical description of what that keypoint looks like.
 kp2, des2 = orb.detectAndCompute(test_note, None)
+
+#compare the fingerprints,BFMatcher (Brute-Force Matcher).
+bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
+matches = bf.match(des1, des2)
+
+#Sometimes a piece of text on the fake note slightly resembles a different piece of text on the real note. This line sorts our list of matches based on their "distance" (mathematical difference). A lower distance means the match is highly accurate. We push the most accurate matches to the top of the list.
+matches = sorted(matches, key=lambda x: x.distance)
