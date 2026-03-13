@@ -2,7 +2,7 @@
 import cv2
 
 #converting the image to grayscale so that lighting and colour dont matter much ,we are concentrating more on the shape and content 
-real_note = cv2.imread('real_note.jpg', cv2.IMREAD_GRAYSCALE)
+real_note = cv2.imread('real_note(100rs).jpg', cv2.IMREAD_GRAYSCALE)
 test_note = cv2.imread('test_note.jpg', cv2.IMREAD_GRAYSCALE)
 
 # Quick safety check to make sure the images actually loaded
