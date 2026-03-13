@@ -41,6 +41,8 @@ else:
 
 #we use cv2.drawMatches() to actually draw colorful lines connecting the top 50 matches between the two images. cv2.imshow() pops open a window on your screen so you can visually see exactly what the computer saw and matched.
 result_image = cv2.drawMatches(real_note, kp1, test_note, kp2, matches[:50], None, flags=2)
+cv2.namedWindow("Feature Matching", cv2.WINDOW_NORMAL) # This tells OpenCV "let me resize this window"
+cv2.resizeWindow("Feature Matching", 1000, 600)        # This sets a nice starting width and height
 cv2.imshow("Feature Matching", result_image)
 
 # Wait for you to press any key before closing the window
