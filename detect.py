@@ -22,3 +22,13 @@ matches = bf.match(des1, des2)
 
 #Sometimes a piece of text on the fake note slightly resembles a different piece of text on the real note. This line sorts our list of matches based on their "distance" (mathematical difference). A lower distance means the match is highly accurate. We push the most accurate matches to the top of the list.
 matches = sorted(matches, key=lambda x: x.distance)
+
+#The Final Test 
+score = len(matches)
+threshold = 150 
+
+if score >= threshold:
+    print("✅ Result: Currency is likely REAL.")
+else:
+    print("❌ Result: Currency is likely FAKE.")
+    
