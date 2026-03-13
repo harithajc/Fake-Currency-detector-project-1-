@@ -38,3 +38,6 @@ else:
 result_image = cv2.drawMatches(real_note, kp1, test_note, kp2, matches[:50], None, flags=2)
 cv2.imshow("Feature Matching", result_image)
 
+# Wait for you to press any key before closing the window
+cv2.waitKey(0) 
+cv2.destroyAllWindows()
