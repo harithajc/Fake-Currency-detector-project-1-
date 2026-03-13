@@ -5,6 +5,11 @@ import cv2
 real_note = cv2.imread('real_note.jpg', cv2.IMREAD_GRAYSCALE)
 test_note = cv2.imread('test_note.jpg', cv2.IMREAD_GRAYSCALE)
 
+# Quick safety check to make sure the images actually loaded
+if real_note is None or test_note is None:
+    print("Error: Could not load images. Check your file names and make sure they are in the same folder!")
+    exit()
+
 #Creating the "Magnifying Glass" (ORB).Instead of looking at a blank patch of paper, it specifically searches for "corners" and unique textures.
 orb = cv2.ORB_create()
 
