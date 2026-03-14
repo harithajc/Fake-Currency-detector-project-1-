@@ -1,14 +1,51 @@
-from flask import Flask
+from flask import Flask, render_template, request
+import cv2
+import os
 
-# This creates our actual "waiter" (the Flask web app)
 app = Flask(__name__)
 
-# This tells Flask what to do when someone goes to the main homepage ("/")
-@app.route('/')
+# We added 'POST' here so the server is allowed to receive the image
+@app.route('/', methods=['GET', 'POST'])
 def home():
-    return "🚀 Your Fake Currency Detector Web Server is Running!"
+    result_message = None  # This will hold our ✅ or ❌ answer
 
-# This block actually starts the server when we run the file
+    # If the user clicked the "Check Currency" button...
+    if request.method == 'POST':
+        # 1. CATCH THE IMAGE from the HTML form
+        file = request.files['currency_image']
+        
+        # 2. SAVE IT temporarily so OpenCV can read it
+        filepath = "uploaded_test_note.jpg"
+        file.save(filepath)
+
+        # 3. THE KITCHEN: Run your exact OpenCV math!
+        real_note = cv2.imread('real_note.jpg', cv2.IMREAD_GRAYSCALE)
+        test_note = cv2.imread(filepath, cv2.IMREAD_GRAYSCALE)
+
+        if real_note is not None and test_note is not None:
+            orb = cv2.ORB_create()
+            kp1, des1 = orb.detectAndCompute(real_note, None)
+            kp2, des2 = orb.detectAndCompute(test_note, None)
+
+            # Safety check: make sure the image isn't totally blank
+            if des1 is not None and des2 is not None:
+                bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
+                matches = bf.match(des1, des2)
+                score = len(matches)
+
+                # The Passing Grade
+                threshold = 150 
+                if score >= threshold:
+                    result_message = f"✅ REAL (Match Score: {score})"
+                else:
+                    result_message = f"❌ FAKE (Match Score: {score})"
+            else:
+                result_message = "❌ FAKE (Could not read any security features)"
+        else:
+            result_message = "⚠️ Error: Make sure your real_note.jpg is in the folder!"
+
+    # 4. THE DELIVERY: Send the HTML page back, along with the final answer!
+    return render_template('index.html', final_result=result_message)
+
 if __name__ == '__main__':
-    # debug=True means the server will automatically update if we change the code!
     app.run(debug=True)
