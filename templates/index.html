@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake Currency Detector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #f4f4f9;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+            display: inline-block;
+        }
+        input[type="file"] {
+            margin: 20px 0;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🔍 Fake Currency Detector</h1>
+        <p>Upload an image of a currency note to verify its authenticity.</p>
+        
+        <form action="/" method="POST" enctype="multipart/form-data">
+            <input type="file" name="currency_image" accept="image/*" required>
+            <br>
+            <button type="submit">Check Currency</button>
+        </form>
+    </div>
+
+</body>
+</html>
