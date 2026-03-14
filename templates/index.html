@@ -46,6 +46,12 @@
             <br>
             <button type="submit">Check Currency</button>
         </form>
+        {% if final_result %}
+            <div style="margin-top: 25px; padding: 15px; border-radius: 5px; background-color: #e9ecef;">
+                <h2>{{ final_result }}</h2>
+            </div>
+        {% endif %}
+        
     </div>
 
 </body>
