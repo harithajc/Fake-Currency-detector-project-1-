@@ -17,6 +17,7 @@
             border-radius: 10px;
             box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
             display: inline-block;
+            max-width: 800px;
         }
         input[type="file"] {
             margin: 20px 0;
@@ -44,7 +45,7 @@
         <form action="/" method="POST" enctype="multipart/form-data">
             <input type="file" name="currency_image" id="fileUpload" accept="image/*" required onchange="showPreview()">
             <br>
-            <img id="imagePreview" src="" style="max-width: 100%; display: none; margin-top: 15px; border-radius: 8px;">
+            <img id="imagePreview" src="" style="max-width: 100%; display: none; margin-top: 15px; border-radius: 8px; border: 2px solid #ccc;">
             <br><br>
             <button type="submit">Check Currency</button>
         </form>
@@ -54,7 +55,7 @@
                 <h2>{{ final_result }}</h2>
                 
                 {% if show_image %}
-                    <p style="color: #666;">Feature Matching Analysis:</p>
+                    <p style="color: #666; font-weight: bold;">Feature Matching Analysis:</p>
                     <img src="{{ url_for('static', filename='match_result.jpg') }}" style="max-width: 100%; border-radius: 8px;">
                 {% endif %}
         
