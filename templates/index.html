@@ -56,7 +56,7 @@
                 
                 {% if show_image %}
                     <p style="color: #666; font-weight: bold;">Feature Matching Analysis:</p>
-                    <img src="{{ url_for('static', filename='match_result.jpg') }}" style="max-width: 100%; border-radius: 8px;">
+                    <img src="{{ url_for('static', filename='match_result.jpg') }}?v=1" style="max-width: 100%; border-radius: 8px; border: 2px solid #ccc;">
                 {% endif %}
         
     </div>
