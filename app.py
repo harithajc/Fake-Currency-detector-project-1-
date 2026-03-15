@@ -32,6 +32,7 @@ def home():
         test_note = cv2.imread(filepath, cv2.IMREAD_GRAYSCALE)
 
         if real_note is not None and test_note is not None:
+            test_note = cv2.resize(test_note, (real_note.shape[1], real_note.shape[0]))
             orb = cv2.ORB_create()
             kp1, des1 = orb.detectAndCompute(real_note, None)
             kp2, des2 = orb.detectAndCompute(test_note, None)
