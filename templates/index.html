@@ -42,10 +42,13 @@
         <p>Upload an image of a currency note to verify its authenticity.</p>
         
         <form action="/" method="POST" enctype="multipart/form-data">
-            <input type="file" name="currency_image" accept="image/*" required>
+            <input type="file" name="currency_image" id="fileUpload" accept="image/*" required onchange="showPreview()">
             <br>
+            <img id="imagePreview" src="" style="max-width: 100%; display: none; margin-top: 15px; border-radius: 8px;">
+            <br><br>
             <button type="submit">Check Currency</button>
         </form>
+
         {% if final_result %}
             <div style="margin-top: 25px; padding: 15px; border-radius: 5px; background-color: #e9ecef;">
                 <h2>{{ final_result }}</h2>
@@ -53,6 +56,16 @@
         {% endif %}
         
     </div>
+
+    <script>
+        function showPreview() {
+            var previewCanvas = document.getElementById('imagePreview');
+            var uploadedFile = document.getElementById('fileUpload').files[0];
+            
+            previewCanvas.src = URL.createObjectURL(uploadedFile);
+            previewCanvas.style.display = "block";
+        }
+    </script>
 
 </body>
 </html>
