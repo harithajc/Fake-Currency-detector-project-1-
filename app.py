@@ -8,6 +8,7 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def home():
     result_message = None  # This will hold our ✅ or ❌ answer
+    show_image = False # This will tell our HTML if an image is ready to show
 
     # If the user clicked the "Check Currency" button...
     if request.method == 'POST':
@@ -31,7 +32,16 @@ def home():
             if des1 is not None and des2 is not None:
                 bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
                 matches = bf.match(des1, des2)
+                # Sort matches so we only draw the best ones!
+                matches = sorted(matches, key=lambda x: x.distance)
                 score = len(matches)
+
+                #DRAW AND SAVE THE MATCHES IMAGE
+                result_image = cv2.drawMatches(real_note, kp1, test_note, kp2, matches[:50], None, flags=2)
+                
+                # Save the image into the static folder so HTML can see it
+                cv2.imwrite('static/match_result.jpg', result_image)
+                show_image = True
 
                 # The Passing Grade
                 threshold = 150 
