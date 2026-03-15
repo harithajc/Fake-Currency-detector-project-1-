@@ -4,6 +4,14 @@ import os
 
 app = Flask(__name__)
 
+# 1. Lock in the exact folder paths
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
+
+# 2. Auto-create the static folder if it doesn't exist!
+if not os.path.exists(STATIC_DIR):
+    os.makedirs(STATIC_DIR)
+
 # We added 'POST' here so the server is allowed to receive the image
 @app.route('/', methods=['GET', 'POST'])
 def home():
