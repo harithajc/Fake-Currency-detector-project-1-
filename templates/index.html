@@ -50,12 +50,18 @@
         </form>
 
         {% if final_result %}
-            <div style="margin-top: 25px; padding: 15px; border-radius: 5px; background-color: #e9ecef;">
+            <div id="resultBox" style="margin-top: 25px; padding: 15px; border-radius: 5px; background-color: #e9ecef;">
                 <h2>{{ final_result }}</h2>
-            </div>
-        {% endif %}
+                
+                {% if show_image %}
+                    <p style="color: #666;">Feature Matching Analysis:</p>
+                    <img src="{{ url_for('static', filename='match_result.jpg') }}" style="max-width: 100%; border-radius: 8px;">
+                {% endif %}
         
     </div>
+  {% endif %}
+        
+</div>  
 
     <script>
         function showPreview() {
@@ -64,6 +70,11 @@
             
             previewCanvas.src = URL.createObjectURL(uploadedFile);
             previewCanvas.style.display = "block";
+            //Hide the old result when they pick a new file!
+            var oldResult = document.getElementById('resultBox');
+            if (oldResult) {
+                oldResult.style.display = "none";
+            }
         }
     </script>
 
