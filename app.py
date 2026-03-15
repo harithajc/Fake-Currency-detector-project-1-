@@ -63,7 +63,7 @@ def home():
             result_message = "⚠️ Error: Make sure your real_note.jpg is in the folder!"
 
     # 4. THE DELIVERY: Send the HTML page back, along with the final answer!
-    return render_template('index.html', final_result=result_message)
+    return render_template('index.html', final_result=result_message, show_image=show_image)
 
 if __name__ == '__main__':
     app.run(debug=True)
