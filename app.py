@@ -28,7 +28,7 @@ def home():
         file.save(filepath)
 
         # 3. THE KITCHEN: Run your exact OpenCV math!
-        real_note = cv2.imread('real_note.jpg', cv2.IMREAD_GRAYSCALE)
+        real_note = cv2.imread('real_note(100rs).jpg', cv2.IMREAD_GRAYSCALE)
         test_note = cv2.imread(filepath, cv2.IMREAD_GRAYSCALE)
 
         if real_note is not None and test_note is not None:
@@ -45,7 +45,7 @@ def home():
                 score = len(matches)
 
                 #DRAW AND SAVE THE MATCHES IMAGE
-                result_image = cv2.drawMatches(real_note, kp1, test_note, kp2, matches[:50], None, flags=2)
+                result_image = cv2.drawMatches(real_note, kp1, test_note, kp2, matches[:20], None, flags=2)
                 
                 # Save the image into the static folder so HTML can see it
                 cv2.imwrite('static/match_result.jpg', result_image)
